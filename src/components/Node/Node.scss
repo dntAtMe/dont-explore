@@ -1,0 +1,17 @@
+.node {
+	
+	background: none;
+	width: 100px;
+	height: 100px;
+
+	&:hover {
+		background-color: cyan;
+	}
+
+	&_name {
+		width: 90%;
+		word-wrap: break-word;
+		overflow-x: hidden;
+		overflow-y: hidden;
+	}
+}
