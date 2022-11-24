@@ -6,7 +6,7 @@ export const Explorer = (props: ExplorerProps) => {
 	return (
 		<div className="d-flex flex-wrap explorer">
 				{props.structure.map((nodeData) =>
-					<Node data={nodeData} />
+					<Node data={nodeData} onNodeClick={props.onNodeClick} />
 				)}
 		</div>
 	)

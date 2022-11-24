@@ -2,55 +2,49 @@ import { useState } from "react";
 import { invoke } from "@tauri-apps/api/tauri";
 import "./App.scss";
 import Explorer from "./components/Explorer/Explorer";
+import Header from "./components/Header/Header";
+import { Button } from "react-bootstrap";
 
 function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [nodes, setNodes] = useState([]);
 
   async function login() {
     // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
     invoke("login", { }).then((value) => {
-      listFiles();
+      setLoggedIn(true);
+      listNodeNames();
     });
   }
 
-  async function listFiles() {
-    setGreetMsg(await invoke("list_files", { }));
+  async function onNodeClick(nodeName: string) {
+    invoke("change_path", {  path: nodeName}).then((v: any) => { 
+			console.log('Success');
+      setNodes(v);
+    }).catch((e) => { 
+			console.log(e)
+		});
+  }
+
+  async function listNodeNames() {
+    invoke("list_nodes", { }).then((v: any) => { 
+      setNodes(v)
+    });
   }
 
   async function logout() {
     invoke("logout", { }).then(() => {
-      setGreetMsg('');
+      setLoggedIn(false);
+      setNodes([]);
     });
   }
 
   return (
-    <div className="container">
-      <h1>Welcome to Tauri!</h1>
-
-      <Explorer structure={[{ name: 'testing_long_name_one_two_three.py', type: 'file'}, { name: 'config.lua', type: 'file'}, { name: '[scripts]', type: 'folder'}]} />
-
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
-
-      <div className="row">
-        <div>
-          <input
-            id="greet-input"
-            onChange={(e) => setName(e.currentTarget.value)}
-            placeholder="Enter a name..."
-          />
-          <button type="button" onClick={() => login()}>
-            Login 
-          </button>
-          <button type="button" onClick={() => listFiles()}>
-            List
-          </button>
-          <button type="button" onClick={() => logout()}>
-            Logout
-          </button>
-        </div>
-      </div>
-      <p>{greetMsg}</p>
+    <div>
+      <Header />
+      <Explorer structure={nodes} onNodeClick={onNodeClick} />
+      { !loggedIn && <Button onClick={login}>Zaloguj</Button> }
+      { loggedIn && <Button onClick={logout}>Wyloguj</Button> }
     </div>
   );
 }

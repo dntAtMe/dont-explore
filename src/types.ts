@@ -1,8 +1,8 @@
-export type NodeType = 'folder' | 'file';
-
 export type NodeData = {
-	type: NodeType,
 	name: string,
+	mode: string,
+	size: number,
+	modification_date: number,
 };
 
 export type Dimensions = {

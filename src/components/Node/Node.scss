@@ -1,17 +1,26 @@
 .node {
 	
-	background: none;
+	background-color: none;
 	width: 100px;
 	height: 100px;
 
+	user-select: none;
+
 	&:hover {
-		background-color: cyan;
+		background-color: #eeeeee;
+		scale: 0.95;
 	}
 
 	&_name {
-		width: 90%;
 		word-wrap: break-word;
 		overflow-x: hidden;
 		overflow-y: hidden;
+
+		font-size: 12px;
+	}
+
+	& > i {
+		font-weight: bold;
+		font-size: 24px;
 	}
 }
