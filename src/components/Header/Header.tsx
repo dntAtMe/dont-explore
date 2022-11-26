@@ -3,6 +3,7 @@ import "./Header.scss";
 import { HeaderProps } from "./types";
 
 export const Header = (props: HeaderProps) => {
+
   return (
     <nav className="navbar navbar-expand-sm navbar-light bg-light">
       <a className="navbar-brand" href="#">
@@ -17,7 +18,13 @@ export const Header = (props: HeaderProps) => {
           <a className="nav-item nav-link" href="#" onClick={props.onClick}>Go back</a>
         </div>
         <Form className="form-inline">
-          <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+          <input 
+            className="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+            onChange={(e) => props.onSearch(e.target.value)}
+          />
         </Form>
       </div>
 

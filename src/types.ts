@@ -4,8 +4,3 @@ export type NodeData = {
   size: number,
   modification_date: number,
 };
-
-export type Dimensions = {
-  x: number,
-  y: number,
-};
