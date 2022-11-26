@@ -7,8 +7,17 @@ use std::{sync::Mutex, usize};
 use chrono::{NaiveDateTime};
 
 use ftp::FtpStream;
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use tauri::State;
+use toml;
+
+#[derive(Clone, Debug, Serialize, Deserialize)]
+struct Config {
+    address: String,
+    port: String,
+    username: String,
+    password: String
+}
 
 struct Connection {
     connection: Mutex<FtpConnection>
@@ -28,9 +37,9 @@ struct NodeData {
 }
 
 impl FtpConnection {
-    pub fn connect(&mut self, user: &str, password: &str) {
-        let mut new_stream = FtpStream::connect("").unwrap();
-        new_stream.login(user, password).unwrap();
+    pub fn connect(&mut self, config: Config) {
+        let mut new_stream = FtpStream::connect(format!("{}:{}", &config.address, &config.port)).unwrap();
+        new_stream.login(&config.username, &config.password).unwrap();
 
         self.stream = Some(new_stream);
     }
@@ -91,10 +100,10 @@ fn list_nodes(ftp_connection: State<Connection>) -> Vec<NodeData> {
 }
 
 #[tauri::command]
-fn login(ftp_connection: State<Connection>) {
+fn login(config: State<Config>, ftp_connection: State<Connection>) {
     let mut guard = ftp_connection.connection.lock().unwrap();
 
-    guard.connect("", "");
+    guard.connect((*config).clone());
 }
 
 #[tauri::command]
@@ -112,10 +121,14 @@ fn logout(ftp_connection: State<Connection>) {
     guard.disconnect();
 }
 
-
 fn main() {
+    // TODO: Connection should be done by user, but for now this will do
+    let config_content = std::fs::read_to_string("config.toml").expect("Should have been able to read the file");
+    let config: Config = toml::from_str(config_content.as_str()).unwrap();
+
     tauri::Builder::default()
         .manage(Connection { connection: Default::default() })
+        .manage( config )
         .invoke_handler(tauri::generate_handler![list_node_names, list_nodes, login, logout, change_path])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
