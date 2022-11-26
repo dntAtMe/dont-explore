@@ -6,7 +6,7 @@ import { invoke } from "@tauri-apps/api";
 export const Node = ({ data, onNodeClick }: NodeProps) => {
 
 	const onClick = () => {
-		onNodeClick(data.name);
+		onNodeClick(data);
 	};
 
 	return (

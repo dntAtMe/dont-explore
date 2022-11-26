@@ -4,10 +4,14 @@ import "./App.scss";
 import Explorer from "./components/Explorer/Explorer";
 import Header from "./components/Header/Header";
 import { Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { AppState } from "./reducer";
 
 function App() {
+  const dispatch = useDispatch();
+  const nodes = useSelector((state: AppState) => state.nodes);
+  
   const [loggedIn, setLoggedIn] = useState(false);
-  const [nodes, setNodes] = useState([]);
 
   async function login() {
     // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
@@ -17,32 +21,23 @@ function App() {
     });
   }
 
-  async function onNodeClick(nodeName: string) {
-    invoke("change_path", {  path: nodeName}).then((v: any) => { 
-			console.log('Success');
-      setNodes(v);
-    }).catch((e) => { 
-			console.log(e)
-		});
-  }
-
   async function listNodeNames() {
     invoke("list_nodes", { }).then((v: any) => { 
-      setNodes(v)
+			dispatch({ type: 'setNodes', payload: v});
     });
   }
 
   async function logout() {
     invoke("logout", { }).then(() => {
       setLoggedIn(false);
-      setNodes([]);
+			dispatch({ type: 'setNodes', payload: []});
     });
   }
 
   return (
     <div>
       <Header />
-      <Explorer structure={nodes} onNodeClick={onNodeClick} />
+      <Explorer structure={nodes} />
       { !loggedIn && <Button onClick={login}>Zaloguj</Button> }
       { loggedIn && <Button onClick={logout}>Wyloguj</Button> }
     </div>
