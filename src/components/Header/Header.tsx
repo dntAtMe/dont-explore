@@ -14,7 +14,7 @@ export const Header = (props: HeaderProps) => {
 				<div className="navbar-nav">
 					<a className="nav-item nav-link" href="#">Root</a>
 					<a className="nav-item nav-link" href="#">Fav 1</a>
-					<a className="nav-item nav-link disabled" href="#">Go back</a>
+					<a className="nav-item nav-link" href="#" onClick={props.onClick}>Go back</a>
 				</div>
 				<Form className="form-inline">
 					<input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />

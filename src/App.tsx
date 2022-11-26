@@ -36,7 +36,6 @@ function App() {
 
   return (
     <div>
-      <Header />
       <Explorer structure={nodes} />
       { !loggedIn && <Button onClick={login}>Zaloguj</Button> }
       { loggedIn && <Button onClick={logout}>Wyloguj</Button> }
