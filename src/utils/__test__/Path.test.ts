@@ -4,37 +4,37 @@ import {expect, jest, test, describe, beforeEach, it} from '@jest/globals';
 import Path from "../Path";
 
 describe("When user", () => {
-	let path: Path;
+  let path: Path;
 
-	beforeEach(() => {
-		path = Path.root();
-	});
+  beforeEach(() => {
+    path = Path.root();
+  });
 
-	it("is in root, object should contain valid path", () => {
-		expect(path.get()).toEqual('/');
-	});
+  it("is in root, object should contain valid path", () => {
+    expect(path.get()).toEqual('/');
+  });
 
-	it("goes back to root, object should contain valid path", () => {
-		path = new Path('/test');
-	
-		expect(path.get()).toEqual('/test/');
+  it("goes back to root, object should contain valid path", () => {
+    path = new Path('/test');
+  
+    expect(path.get()).toEqual('/test/');
 
-		const ret = path.goBack();
+    const ret = path.goBack();
 
-		expect(path.get()).toEqual('/');
-		expect(ret).toEqual(true);
-	});
+    expect(path.get()).toEqual('/');
+    expect(ret).toEqual(true);
+  });
 
-	it("goes back from root, object should contain valid path", () => {
-		const ret = path.goBack();
+  it("goes back from root, object should contain valid path", () => {
+    const ret = path.goBack();
 
-		expect(path.get()).toEqual('/');
-		expect(ret).toEqual(false);
-	});
+    expect(path.get()).toEqual('/');
+    expect(ret).toEqual(false);
+  });
 
-	it ("goes to location, object should contain valid path", () => {
-		path.go('test2');
+  it ("goes to location, object should contain valid path", () => {
+    path.go('test2');
 
-		expect(path.get()).toEqual('/test2/');
-	});
+    expect(path.get()).toEqual('/test2/');
+  });
 });

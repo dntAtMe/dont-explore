@@ -1,6 +1,6 @@
 import { NodeData } from "../../types";
 
 export type NodeProps = {
-	data: NodeData;
-	onNodeClick: any;
+  data: NodeData;
+  onNodeClick: any;
 };

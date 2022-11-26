@@ -1,26 +1,26 @@
 .node {
-	
-	background-color: none;
-	width: 100px;
-	height: 100px;
+  
+  background-color: none;
+  width: 100px;
+  height: 100px;
 
-	user-select: none;
+  user-select: none;
 
-	&:hover {
-		background-color: #eeeeee;
-		scale: 0.95;
-	}
+  &:hover {
+    background-color: #eeeeee;
+    scale: 0.95;
+  }
 
-	&_name {
-		word-wrap: break-word;
-		overflow-x: hidden;
-		overflow-y: hidden;
+  &_name {
+    word-wrap: break-word;
+    overflow-x: hidden;
+    overflow-y: hidden;
 
-		font-size: 12px;
-	}
+    font-size: 12px;
+  }
 
-	& > i {
-		font-weight: bold;
-		font-size: 24px;
-	}
+  & > i {
+    font-weight: bold;
+    font-size: 24px;
+  }
 }

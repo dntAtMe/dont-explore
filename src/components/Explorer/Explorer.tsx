@@ -10,42 +10,42 @@ import { useState } from "react";
 import Path from "../../utils/Path";
 
 export const Explorer = (props: ExplorerProps) => {
-	const dispatch = useDispatch();
-	const [currentPath, setCurrentPath] = useState<Path>(Path.root());
+  const dispatch = useDispatch();
+  const [currentPath, setCurrentPath] = useState<Path>(Path.root());
 
-	const onNodeClick = async(data: NodeData) => {
-		currentPath.go(data.name);
+  const onNodeClick = async(data: NodeData) => {
+    currentPath.go(data.name);
     invoke("change_path", {  path: currentPath.get()}).then((v: any) => { 
-			console.log('Success');
-			dispatch({ type: 'setNodes', payload: v});
+      console.log('Success');
+      dispatch({ type: 'setNodes', payload: v});
     }).catch((e) => { 
-			console.log(e)
-		});
+      console.log(e)
+    });
   }
 
-	const onGoBackClick = async() => {
-		const didGoBack = currentPath.goBack();
+  const onGoBackClick = async() => {
+    const didGoBack = currentPath.goBack();
 
-		if (didGoBack) {
-			invoke("change_path", {  path: currentPath.get()}).then((v: any) => { 
-				console.log('Success');
-				dispatch({ type: 'setNodes', payload: v});
-    	}).catch((e) => { 
-				console.log(e)
-			});
-		}
-	};
+    if (didGoBack) {
+      invoke("change_path", {  path: currentPath.get()}).then((v: any) => { 
+        console.log('Success');
+        dispatch({ type: 'setNodes', payload: v});
+      }).catch((e) => { 
+        console.log(e)
+      });
+    }
+  };
 
-	return (
-		<>
-			<Header onClick={onGoBackClick} />
-			<div className="d-flex flex-wrap explorer">
-					{props.structure.map((nodeData) =>
-						<Node data={nodeData} onNodeClick={onNodeClick} />
-					)}
-			</div>
-		</>
-	)
+  return (
+    <>
+      <Header onClick={onGoBackClick} />
+      <div className="d-flex flex-wrap explorer">
+          {props.structure.map((nodeData) =>
+            <Node data={nodeData} onNodeClick={onNodeClick} />
+          )}
+      </div>
+    </>
+  )
 };
 
 export default Explorer;
