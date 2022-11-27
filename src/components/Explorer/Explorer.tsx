@@ -7,7 +7,7 @@ import { AppState } from "../../reducer";
 import Header from "../Header/Header";
 import { useEffect, useMemo, useState } from "react";
 import Path from "../../utils/Path/Path";
-import { Node } from "../../utils/Node/Node";
+import Node from "../../utils/Node/Node";
 
 export const Explorer = (props: ExplorerProps) => {
   const dispatch = useDispatch();

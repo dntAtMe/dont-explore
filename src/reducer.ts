@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux'
-import { Node } from './utils/Node/Node';
+import Node from './utils/Node/Node';
 import { NodeData } from './utils/types';
 
 
