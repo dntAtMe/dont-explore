@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`When NodeTile is rendered it should render properly 1`] = `
+<DocumentFragment>
+  <div
+    class="text-center node d-flex flex-column"
+    data-testid="node"
+  >
+    <i
+      class="bi bi-folder"
+    />
+    <span
+      class="node_name"
+    >
+      directory
+    </span>
+  </div>
+</DocumentFragment>
+`;

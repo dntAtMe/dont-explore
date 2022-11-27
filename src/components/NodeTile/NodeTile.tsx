@@ -8,7 +8,7 @@ export const NodeTile = ({ data, onNodeClick }: NodeTileProps) => {
   };
 
   return (
-    <div onClick={onClick} className='text-center node d-flex flex-column'>
+    <div onClick={onClick} data-testid="node" className='text-center node d-flex flex-column'>
       <i className=  { data.mode.type === 'directory' ? 'bi bi-folder' : 'bi bi-file-earmark' }></i>	
       <span className="node_name">{data.name}</span>
     </div>
