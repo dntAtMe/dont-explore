@@ -1,5 +1,5 @@
-import { NodeData } from "../../types";
+import { Node } from "../../utils/Node/Node";
 
 export interface ExplorerProps {
-  structure: NodeData[];
+  structure: Node[];
 }

@@ -1,9 +1,10 @@
-import { NodeData } from "./types";
 import { AnyAction } from 'redux'
+import { Node } from './utils/Node/Node';
+import { NodeData } from './utils/types';
 
 
 export interface AppState {
-  nodes: NodeData[];
+  nodes: Node[];
 };
 
 export const initialState: AppState = {
@@ -13,10 +14,10 @@ export const initialState: AppState = {
 const rootReducer = (state = initialState, action: AnyAction) => {
   console.log(action.type, action.payload);
   if (action.type === 'setNodes' && (action.payload as NodeData[])) {
-    console.log('yup');
+    const nodes = action.payload as NodeData[];
     return {
       ...state,
-      nodes: action.payload
+      nodes: nodes.map((n) => new Node(n))
     }
   }
 
