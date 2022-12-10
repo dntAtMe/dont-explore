@@ -1,0 +1,17 @@
+@import '../../App.scss';
+
+input {
+  &.valid {
+    border: 1px solid $color-success;
+  }
+  &.invalid {
+    border: 1px solid $color-failure;
+  }
+  &.neutral {
+    border: 1px solid $color-neutral;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
