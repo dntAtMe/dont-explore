@@ -24,7 +24,7 @@ export const Input = ({ validate }: InputProps) => {
   }
 
   return (
-    <input className={`${getValidationClassName()}`} type="text" onInput={onInput} />
+    <input data-testid="test-input" className={`${getValidationClassName()}`} type="text" onInput={onInput} />
   )
 };
 

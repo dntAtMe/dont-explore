@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input w/ validation should render properly when validation failed 1`] = `
+<DocumentFragment>
+  <input
+    class="invalid"
+    data-testid="test-input"
+    type="text"
+  />
+</DocumentFragment>
+`;
+
+exports[`Input w/ validation should render properly when validation successful 1`] = `
+<DocumentFragment>
+  <input
+    class="valid"
+    data-testid="test-input"
+    type="text"
+  />
+</DocumentFragment>
+`;
+
+exports[`Input w/out validation should render properly 1`] = `
+<DocumentFragment>
+  <input
+    class="neutral"
+    data-testid="test-input"
+    type="text"
+  />
+</DocumentFragment>
+`;
